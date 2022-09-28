@@ -8,7 +8,7 @@ import (
 func main() {
 	fmt.Println("Hello" + "!!!")
 	calc()
-	fmt.Printf("Logical CPUs: %s", runtime.NumCPU())
+	fmt.Println("Logical CPUs:", runtime.NumCPU())
 	bye()
 }
 
