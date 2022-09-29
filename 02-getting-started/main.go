@@ -19,3 +19,7 @@ func calc() {
 		fmt.Println(" then 1")
 	}
 }
+
+func bye() {
+	fmt.Println("Bye-bye!")
+}
