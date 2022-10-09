@@ -7,6 +7,7 @@ import (
 
 //to run
 //  go build -o greeter
+// 	./greeter hi
 // 	./greeter hi hello
 
 func main() {
