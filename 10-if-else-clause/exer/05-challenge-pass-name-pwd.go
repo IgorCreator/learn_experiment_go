@@ -5,13 +5,16 @@ import (
 	"os"
 )
 
-//  go build -o args-app 05-arg-count.go
+// 1) Run 1st way
+// go build -o args-app 05-arg-count.go
 // 	./args-app
 // 	./args-app albert
 // 	./args-app hacker 42
 // 	./args-app jack 6475
-// 	./args-app jack 1888
-// 	./args-app inanc 1879
+//
+// 2) Run other way
+// go run 05-challenge-pass-name-pwd.go jack 1888
+// go run 05-challenge-pass-name-pwd.go inanc 1879
 
 var dict = map[string]string{
 	"jack":  "1888",
