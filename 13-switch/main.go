@@ -12,6 +12,12 @@ func main() {
 	city := os.Args[1]
 
 	switchCaseIntro(city)
+	withFallThrough(142)
+	withFallThrough(100)
+	withFallThrough(1)
+	withFallThrough(0)
+	withFallThrough(-32)
+	withFallThrough(-132)
 }
 
 func switchCaseIntro(city string) {
@@ -25,4 +31,27 @@ func switchCaseIntro(city string) {
 	default:
 		fmt.Println("Where?")
 	}
+}
+
+func withFallThrough(i int) {
+	switch {
+	case i == 0:
+		fmt.Print("zero")
+	case i > 100:
+		fmt.Print("big ")
+		fallthrough
+	case i > 0:
+		fmt.Print("positive ")
+		fallthrough
+	case i < -100:
+		fmt.Print("big ")
+		fallthrough
+	case i < 0:
+		fmt.Print("negative ")
+		fallthrough
+	default:
+		fmt.Print("number")
+	}
+
+	fmt.Println()
 }
