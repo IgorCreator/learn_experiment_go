@@ -27,7 +27,7 @@ func main() {
 func richterScale(magnitude float64) {
 	var desc string
 
-	switch r := magnitude; {
+	switch r := magnitude; { // same as -> r := magnitude; switch true {}
 	case r > 0.0 && r < 2.0:
 		desc = "micro"
 	case r > 2.0 && r < 3.0:

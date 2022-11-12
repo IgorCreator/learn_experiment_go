@@ -2,16 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
-//  go run main.go Paris
-//  go run main.go Moscow
+//  go run main.go
 
 func main() {
-	city := os.Args[1]
+	switchCaseIntro("Paris")
+	switchCaseIntro("Moscow")
 
-	switchCaseIntro(city)
 	withFallThrough(142)
 	withFallThrough(100)
 	withFallThrough(1)
