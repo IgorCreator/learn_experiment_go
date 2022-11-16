@@ -18,6 +18,7 @@ func main() {
 	max, err2 := strconv.Atoi(os.Args[2])
 	if err1 != nil || err2 != nil {
 		fmt.Println("Please provide num")
+		return
 	}
 	if max < min {
 		fmt.Println("Min can't be bigger then max")
