@@ -12,8 +12,10 @@ type placeholder [5]string
 const sc = "\u001B7"
 const rc = "\u001B8"
 
+// go run clock.go templates.go
+
 func main() {
-	digits := formDigits()
+	digits := FormDigits()
 
 	hide := false
 	for {
@@ -23,9 +25,9 @@ func main() {
 
 		clock := [...]placeholder{
 			digits[hour/10], digits[hour%10],
-			getSeparator(hide),
+			GetSeparator(hide),
 			digits[min/10], digits[min%10],
-			getSeparator(hide),
+			GetSeparator(hide),
 			digits[sec/10], digits[sec%10],
 		}
 
@@ -40,113 +42,6 @@ func main() {
 		hide = !hide
 	}
 
-}
-
-func formDigits() [10]placeholder {
-	zero := placeholder{
-		"███",
-		"█ █",
-		"█ █",
-		"█ █",
-		"███",
-	}
-
-	one := placeholder{
-		"██ ",
-		" █ ",
-		" █ ",
-		" █ ",
-		"███",
-	}
-
-	two := placeholder{
-		"███",
-		"  █",
-		"███",
-		"█  ",
-		"███",
-	}
-
-	three := placeholder{
-		"███",
-		"  █",
-		"███",
-		"  █",
-		"███",
-	}
-
-	four := placeholder{
-		"█ █",
-		"█ █",
-		"███",
-		"  █",
-		"  █",
-	}
-
-	five := placeholder{
-		"███",
-		"█  ",
-		"███",
-		"  █",
-		"███",
-	}
-
-	six := placeholder{
-		"███",
-		"█  ",
-		"███",
-		"█ █",
-		"███",
-	}
-
-	seven := placeholder{
-		"███",
-		"  █",
-		"  █",
-		"  █",
-		"  █",
-	}
-
-	eight := placeholder{
-		"███",
-		"█ █",
-		"███",
-		"█ █",
-		"███",
-	}
-
-	nine := placeholder{
-		"███",
-		"█ █",
-		"███",
-		"  █",
-		"███",
-	}
-
-	digits := [...]placeholder{
-		zero, one, two, three, four, five, six, seven, eight, nine,
-	}
-	return digits
-}
-
-func getSeparator(hide bool) placeholder {
-	if hide {
-		return placeholder{
-			"   ",
-			" ░ ",
-			"   ",
-			" ░ ",
-			"   ",
-		}
-	} else {
-		return placeholder{
-			"   ",
-			"   ",
-			"   ",
-			"   ",
-			"   ",
-		}
-	}
 }
 
 func clearScreen() {
