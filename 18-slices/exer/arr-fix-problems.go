@@ -7,6 +7,11 @@ import (
 )
 
 func main() {
+	firstIssue()
+	secondIssue()
+}
+
+func firstIssue() {
 	names := []string{"Einstein", "Shepard", "Tesla"}
 
 	books := []string{
@@ -25,4 +30,15 @@ func main() {
 
 	fmt.Printf("%q\n", books)
 	fmt.Printf("%d\n", nums)
+}
+
+func secondIssue() {
+	toppings := []string{"black olives", "green peppers"}
+
+	var pizza []string
+	pizza = append(pizza, toppings...)
+	pizza = append(pizza, "onions", "extra cheese")
+
+	fmt.Printf("toppings    : %s\n", toppings)
+	fmt.Printf("pizza       : %s\n", pizza)
 }
