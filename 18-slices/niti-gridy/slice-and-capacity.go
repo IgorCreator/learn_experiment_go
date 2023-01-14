@@ -4,6 +4,12 @@ import (
 	s "github.com/inancgumus/prettyslice"
 )
 
+// Difference between length and capacity in Slice?
+//
+// The length describes the length of a slice but a
+// capacity describes the length of the backing array
+// beginning from the first element of the slice
+
 func main() {
 	s.PrintBacking = true
 
