@@ -17,16 +17,31 @@ import (
 //Don't try to optimize it unless necessary.
 
 func main() {
-	ages, oldCap := []int{1}, 1.
+	growthRationWithAppend()
+}
 
-	for len(ages) < 5e5 {
-		ages = append(ages, 1)
+func growthRationWithAppend() {
+	var (
+		nums   []int
+		oldCap float64
+	)
 
-		c := float64(cap(ages))
-		if c != oldCap {
-			fmt.Printf("len:%-10d cap:%-10g growth:%.2f\n",
-				len(ages), c, c/oldCap)
+	// loop 10 million times
+	for len(nums) < 1e7 {
+		// get the capacity
+		c := float64(cap(nums))
+
+		// only print when the capacity changes
+		if c == 0 || c != oldCap {
+			// print also the growth ratio: c/oldCap
+			fmt.Printf("len:%-15d cap:%-15g growth:%-15.2f\n",
+				len(nums), c, c/oldCap)
 		}
+
+		// keep track of the previous capacity
 		oldCap = c
+
+		// append an arbitrary element to the slice
+		nums = append(nums, 1)
 	}
 }
