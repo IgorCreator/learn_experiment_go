@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bytes"
+	"encoding/gob"
 	"fmt"
 	"os"
+	"sort"
 )
 
 // go run dir-finder.go ./test_dir
@@ -24,14 +27,15 @@ func main() {
 	//var emptyFiles []byte          // Unoptimized
 	//totalMem := len(files)*256     // Too much memory allocated
 	totalMem := optimizedMemoryAllocation(files)
-	emptyFiles := make([]byte, 0, totalMem)
+	emptyFiles := make([]string, 0, totalMem)
 
 	for _, el := range files {
 		info, _ := el.Info()
 
 		if info.Size() == 0 {
-			emptyFiles = append(emptyFiles, info.Name()...)
-			emptyFiles = append(emptyFiles, "\n"...)
+			i := len(emptyFiles)
+			lineToAdd := fmt.Sprintf("%d. %s", i+1, info.Name())
+			emptyFiles = append(emptyFiles, lineToAdd)
 			continue
 		}
 
@@ -44,8 +48,18 @@ func main() {
 	}
 
 	if len(emptyFiles) != 0 {
+		sort.Strings(emptyFiles)
 		fmt.Printf("\nEmpty files: %s", emptyFiles)
-		writeErr := os.WriteFile("empty-files.txt", emptyFiles, 0644)
+
+		buf := &bytes.Buffer{}
+		enErr := gob.NewEncoder(buf).Encode(emptyFiles)
+		if enErr != nil {
+			fmt.Printf("Error during encoding: %v", enErr)
+			return
+		}
+		bs := buf.Bytes()
+
+		writeErr := os.WriteFile("empty-files.txt", bs, 0644)
 		if writeErr != nil {
 			fmt.Printf("Error during writing file: %v", writeErr)
 			return
