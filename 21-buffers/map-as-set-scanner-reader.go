@@ -43,14 +43,4 @@ func main() {
 		return
 	}
 	fmt.Printf("Sorry. The input does not contain %q.\n", query)
-
-	// query := "sun"
-	// fmt.Println("sun:", words["sun"], "tesla:", words["tesla"])
-
-	// unnecessary
-	// if _, ok := words[query]; ok {
-	// 	fmt.Printf("The input contains %q.\n", query)
-	// 	return
-	// }
-	// fmt.Printf("Sorry. The input does not contain %q.\n", query)
 }
