@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-// go run decode-json-unmarshal.go > user_out.txt
+// go run enc-json-unmarshal.go > user_out.txt
 // go run decode-json-unmarshal.go < user_out.txt
 
 type Employee struct {
