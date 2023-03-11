@@ -43,3 +43,19 @@ func parse(line string, p parser) (parsed result, err error) {
 
 	return
 }
+
+func update(p parser, parsed result) parser {
+	domain, visits := parsed.domain, parsed.visits
+
+	if _, ok := p.sum[domain]; !ok {
+		p.domains = append(p.domains, domain)
+	}
+
+	p.total += visits
+	p.sum[domain] = result{
+		domain: domain,
+		visits: visits + p.sum[domain].visits,
+	}
+
+	return p
+}

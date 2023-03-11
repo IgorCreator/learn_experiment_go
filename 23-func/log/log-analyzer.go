@@ -26,18 +26,8 @@ func main() {
 			fmt.Println("> Err:", err)
 			return
 		}
-		domain, visits := parsed.domain, parsed.visits
 
-		// Collect the unique domains
-		if _, ok := p.sum[domain]; !ok {
-			p.domains = append(p.domains, domain)
-		}
-
-		p.total += visits
-		p.sum[domain] = result{
-			domain: domain,
-			visits: visits + p.sum[domain].visits,
-		}
+		p = update(p, parsed)
 	}
 
 	sort.Strings(p.domains)
