@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -58,4 +60,21 @@ func update(p parser, parsed result) parser {
 	}
 
 	return p
+}
+
+func printScannerErr(in *bufio.Scanner) {
+	if err := in.Err(); err != nil {
+		fmt.Println("> Err:", err)
+	}
+}
+
+func printParsedLog(p parser) {
+	sort.Strings(p.domains)
+	fmt.Printf("%-30s %10s\n", "DOMAIN", "VISITS")
+	fmt.Println(strings.Repeat("-", 45))
+	for _, domain := range p.domains {
+		parsed := p.sum[domain]
+		fmt.Printf("%-30s %10d\n", domain, parsed.visits)
+	}
+	fmt.Printf("\n%-30s %10d\n", "TOTAL", p.total)
 }
