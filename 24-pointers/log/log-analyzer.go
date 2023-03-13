@@ -7,27 +7,19 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 )
 
 func main() {
-	parsed := result{}
+	parsed := &result{}
 	p := newParser()
 
 	// Scan the standard-in line by line
 	in := bufio.NewScanner(os.Stdin)
 	for in.Scan() {
-		p.lines++
-
-		err := parse(in.Text(), &p, &parsed)
-		if err != nil {
-			fmt.Println("> Err:", err)
-			return
-		}
-
-		update(&p, &parsed)
+		parse(in.Text(), p, parsed)
+		update(p, parsed)
 	}
 	printParsedLog(p)
-	printScannerErr(in)
+	printScannerErr([]error{in.Err(), err(p)})
 }

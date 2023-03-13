@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"sort"
 	"strconv"
@@ -20,59 +19,72 @@ type parser struct {
 	domains []string          // unique domain names
 	total   int               // total visits for all domains
 	lines   int               // number of parsed lines (for the error messages)
+	lerr    error
 }
 
-func newParser() parser {
-	return parser{sum: make(map[string]result)}
+func newParser() *parser {
+	return &parser{sum: make(map[string]result)}
 }
 
-func parse(line string, p *parser, parsed *result) (err error) {
+func parse(line string, p *parser, r *result) {
+	if p.lerr != nil {
+		return
+	}
+
+	p.lines++
+
 	// Parse the fields
 	fields := strings.Fields(line)
 	if len(fields) != 2 {
-		err = fmt.Errorf("wrong input: %v (line #%d)", fields, p.lines)
-		return err
+		p.lerr = fmt.Errorf("wrong input: %v (line #%d)", fields, p.lines)
 	}
 
-	parsed.domain = fields[0]
+	r.domain = fields[0]
 
 	// Sum the total visits per domain
-	parsed.visits, err = strconv.Atoi(fields[1])
-	if parsed.visits < 0 || err != nil {
-		err = fmt.Errorf("wrong input: %q (line #%d)", fields[1], p.lines)
-		return err
-	}
-
-	return
-}
-
-func update(p *parser, parsed *result) {
-	domain, visits := parsed.domain, parsed.visits
-
-	if _, ok := p.sum[domain]; !ok {
-		p.domains = append(p.domains, domain)
-	}
-
-	p.total += visits
-	p.sum[domain] = result{
-		domain: domain,
-		visits: visits + p.sum[domain].visits,
+	var err error
+	r.visits, err = strconv.Atoi(fields[1])
+	if r.visits < 0 || err != nil {
+		p.lerr = fmt.Errorf("wrong input: %q (line #%d)", fields[1], p.lines)
 	}
 }
 
-func printScannerErr(in *bufio.Scanner) {
-	if err := in.Err(); err != nil {
-		fmt.Println("> Err:", err)
+func update(p *parser, r *result) {
+	if p.lerr != nil {
+		return
+	}
+
+	//domain, visits := r.domain, r.visits
+
+	if _, ok := p.sum[r.domain]; !ok {
+		p.domains = append(p.domains, r.domain)
+	}
+
+	p.total += r.visits
+	p.sum[r.domain] = result{
+		domain: r.domain,
+		visits: r.visits + p.sum[r.domain].visits,
 	}
 }
 
-func printParsedLog(p parser) {
+func printScannerErr(errs []error) {
+	for _, err := range errs {
+		if err != nil {
+			fmt.Println("> Err:", err)
+		}
+	}
+}
+
+func printParsedLog(p *parser) {
 	sort.Strings(p.domains)
 	fmt.Printf("%-30s %10s\n", "DOMAIN", "VISITS")
 	fmt.Println(strings.Repeat("-", 45))
 	for _, domain := range p.domains {
-		parsed := p.sum[domain]
-		fmt.Printf("%-30s %10d\n", domain, parsed.visits)
+		fmt.Printf("%-30s %10d\n", domain, p.sum[domain].visits)
 	}
 	fmt.Printf("\n%-30s %10d\n", "TOTAL", p.total)
+}
+
+func err(p *parser) error {
+	return p.lerr
 }
