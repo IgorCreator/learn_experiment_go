@@ -9,8 +9,8 @@
 package main
 
 import (
-	i "go_test/25-oop/oop-refactored/intefaces"
-	o "go_test/25-oop/oop-refactored/specifc_obj"
+	i "go_test/25-oop/oop-refactored-v1/intefaces"
+	o "go_test/25-oop/oop-refactored-v1/specifc_obj"
 )
 
 func main() {

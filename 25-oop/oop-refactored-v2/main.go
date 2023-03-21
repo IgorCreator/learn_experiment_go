@@ -6,12 +6,19 @@
 // In-person training  : https://www.linkedin.com/in/inancgumus/
 // Follow me on twitter: https://twitter.com/inancgumus
 
-package specifc_obj
+package main
 
 import (
-	"go_test/25-oop/oop-refactored/intefaces"
+	i "go_test/25-oop/oop-refactored-v2/intefaces"
 )
 
-type Toy struct {
-	intefaces.Product
+func main() {
+	l := i.List{
+		{Title: "moby dick", Price: 10, Released: i.ToTimestamp(118281600)},
+		{Title: "odyssey", Price: 15, Released: i.ToTimestamp("733622400")},
+		{Title: "hobbit", Price: 25},
+	}
+
+	l.Discount(.5)
+	l.Print()
 }

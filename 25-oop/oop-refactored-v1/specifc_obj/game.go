@@ -9,7 +9,7 @@
 package specifc_obj
 
 import (
-	"go_test/25-oop/oop-refactored/intefaces"
+	"go_test/25-oop/oop-refactored-v1/intefaces"
 )
 
 type Game struct {
