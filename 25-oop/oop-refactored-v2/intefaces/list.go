@@ -8,19 +8,25 @@
 
 package intefaces
 
-import "fmt"
+import (
+	"strings"
+)
 
 type List []*Product
 
-func (l List) Print() {
+func (l List) String() string {
 	if len(l) == 0 {
-		fmt.Println("Sorry. We're waiting for delivery 🚚.")
-		return
+		return "Sorry. We're waiting for delivery 🚚."
 	}
 
+	var str strings.Builder
 	for _, p := range l {
-		p.Print()
+		str.WriteString("* ")
+		str.WriteString(p.String())
+		str.WriteRune('\n')
 	}
+
+	return str.String()
 }
 
 func (l List) Discount(ratio float64) {

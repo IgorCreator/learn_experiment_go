@@ -18,8 +18,8 @@ type Product struct {
 	Released Timestamp
 }
 
-func (p *Product) Print() {
-	fmt.Printf("%-15s: %s\n", p.Title, p.Released.String())
+func (p *Product) String() string {
+	return fmt.Sprintf("%-15s: %-8s (%s)", p.Title, p.Price, p.Released)
 }
 
 func (p *Product) Discount(ratio float64) {

@@ -1,17 +1,11 @@
-// Copyright © 2018 Inanc Gumus
-// Learn Go Programming Course
-// License: https://creativecommons.org/licenses/by-nc-sa/4.0/
-//
-// For more tutorials  : https://learngoprogramming.com
-// In-person training  : https://www.linkedin.com/in/inancgumus/
-// Follow me on twitter: https://twitter.com/inancgumus
-
 package main
 
 import (
+	"fmt"
 	i "go_test/25-oop/oop-refactored-v2/intefaces"
 )
 
+// go run ...
 func main() {
 	l := i.List{
 		{Title: "moby dick", Price: 10, Released: i.ToTimestamp(118281600)},
@@ -20,5 +14,5 @@ func main() {
 	}
 
 	l.Discount(.5)
-	l.Print()
+	fmt.Printf("%s", l)
 }
