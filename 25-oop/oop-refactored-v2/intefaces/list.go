@@ -9,6 +9,7 @@
 package intefaces
 
 import (
+	"sort"
 	"strings"
 )
 
@@ -33,4 +34,22 @@ func (l List) Discount(ratio float64) {
 	for _, p := range l {
 		p.Discount(ratio)
 	}
+}
+func (l List) Len() int {
+	return len(l)
+}
+func (l List) Less(i, j int) bool {
+	return l[i].Title < l[j].Title
+}
+func (l List) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
+}
+
+type ByRelease struct{ List }
+
+func (br ByRelease) Less(i, j int) bool {
+	return br.List[i].Released.Before(br.List[j].Released.Time)
+}
+func ByReleasedDate(l List) sort.Interface {
+	return &ByRelease{l}
 }
