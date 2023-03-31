@@ -8,12 +8,6 @@ So here it is. Enjoy.
 
 Sharing is free but caring is priceless. So you can share this repo with your friend.
 
-## Stay in touch with go
-
-* **[Read medium blog](https://blog.learngoprogramming.com)**
-
-* **[Watch Youtube channel](https://www.youtube.com/channel/UCYxepZhtnFIVRh8t5H_QAdg?view_as=subscriber)**
-
 * **[Read Go online documentation](https://golang.org/pkg)**.
 
 * Also, **take a tour on**: https://tour.golang.org/
